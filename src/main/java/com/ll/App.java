@@ -9,11 +9,12 @@ class App {
     List<Quotation> quotations;
     Scanner scanner;
 
-    App(){
-        scanner  = new Scanner(System.in);
+    App() {
+        scanner = new Scanner(System.in);
         lastQuotationId = 1;
         quotations = new ArrayList<>();
     }
+
     void run() {
         System.out.println("=== 명령 앱 ===");
         while (true) {
@@ -26,9 +27,18 @@ class App {
 
             } else if (cmd.equals("목록")) {
                 actionList();
+            } else if (cmd.startsWith("삭제?")) {
+                actionRemove(cmd);
             }
         }
     }
+
+    private void actionRemove(String cmd) {
+        String idStr = cmd.replace( "삭제?id=",  "");
+        int id = Integer.parseInt(idStr);
+        System.out.println(id + "번 명언이 삭제되었습니다.");
+    }
+
     private void actionList() {
         System.out.println("총 개수 : " + quotations.size());
         System.out.println("번호 / 작가 / 명언");
